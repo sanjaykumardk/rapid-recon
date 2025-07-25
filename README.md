@@ -20,11 +20,13 @@
 
 ## 🚀 Getting Started
 
-### Prerequisites
+### Prerequisites and .env Configuration
 
 - Python 3.8+
 - Internet connection (for external lookups)
 - Recommended: Virtual environment
+- Within .env file :
+- IPINFO_TOKEN=your_token
 
 ---
 
