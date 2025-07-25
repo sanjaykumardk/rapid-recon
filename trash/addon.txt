@@ -1,0 +1,19 @@
+🔍 Tool Usefulness Rating (for Pentesting)
+Current Recon Tool Rating:
+
+    🔟 / 10 ➝ 6.5/10
+
+Why?
+Feature	Status	Comments
+✅ Whois	✔️ Complete	Good source for domain ownership info.
+✅ DNS	✔️ Complete	A records, MX, TXT, NS — well done.
+✅ Port Scan	✔️ Basic	Shows open ports and services. Needs OS detection and better fingerprinting.
+✅ HTTP Headers	✔️ Complete	Good info for banner grabbing.
+✅ Tech Stack Detection	✔️ Basic	Uses BuiltWith. Limited but useful.
+✅ GeoIP	✔️ Complete	Accurate & clean.
+❌ Subdomain Enum	✖️ Missing	One of the most important recon steps!
+❌ Directory Brute Force	✖️ Missing	No Gobuster-style brute-forcing yet.
+❌ Screenshotting	✖️ Missing	No visual recon (with webscreenshot, etc.).
+❌ Vulnerability DB	✖️ Missing	No CVE lookups or common vulns detection.
+❌ Authentication Check	✖️ Missing	No detection of login portals, auth mechanisms.
+❌ Passive Recon	✖️ Missing	No integrations with Shodan, Censys, or public data leaks.

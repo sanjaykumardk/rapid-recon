@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recon Report - letterboxd.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(to right, #283e51, #485563);
+            color: #fff;
+            text-align: center;
+            padding: 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        h2 {
+            font-size: 1.4rem;
+            margin-top: 1rem;
+            color: #1f3c88;
+        }
+        .section {
+            background: #fff;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            max-width: 1000px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .summary-table, .kv-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        .summary-table th, .summary-table td,
+        .kv-table th, .kv-table td {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .summary-table th {
+            background: #f0f4f8;
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.7rem;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        .badge.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .badge.fail {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .card {
+            background: #f9fbfd;
+            border: 1px solid #e1e5ea;
+            border-radius: 6px;
+            padding: 0.8rem 1rem;
+            margin-bottom: 0.7rem;
+        }
+        .card strong {
+            color: #2c3e50;
+        }
+        .code-block {
+            background: #f4f4f4;
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin-top: 0.5rem;
+        }
+        .footer {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #888;
+            padding: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🛡️ Recon Report</h1>
+    <p>Target: <strong>letterboxd.com</strong><br>
+    Generated on: 2025-07-25 18:46:38</p>
+</header>
+
+<div class="section">
+    <h2>📋 Summary</h2>
+    <table class="summary-table">
+        <tr><th>Section</th><th>Status</th></tr><tr><td>Whois</td><td><span class='badge success'>✔️ Collected</span></td></tr><tr><td>Dns</td><td><span class='badge success'>✔️ Collected</span></td></tr><tr><td>Ports</td><td><span class='badge success'>✔️ Collected</span></td></tr><tr><td>Http</td><td><span class='badge success'>✔️ Collected</span></td></tr><tr><td>Tech</td><td><span class='badge success'>✔️ Collected</span></td></tr><tr><td>Geoip</td><td><span class='badge success'>✔️ Collected</span></td></tr></table></div><div class="section">
+    <h2>📂 Whois</h2>
+    <table class='kv-table'><tr><th>Key</th><th>Value</th></tr><tr><td>domain</td><td><table class='kv-table'><tr><th>Key</th><th>Value</th></tr><tr><td>domain_name</td><td>LETTERBOXD.COM</td></tr><tr><td>registrar</td><td>NameCheap, Inc.</td></tr><tr><td>creation_date</td><td>2009-01-04 22:06:08</td></tr><tr><td>expiration_date</td><td>2028-01-04 22:06:08</td></tr><tr><td>name_servers</td><td><ul><li>ISLA.NS.CLOUDFLARE.COM</li><li>MAJOR.NS.CLOUDFLARE.COM</li></ul></td></tr><tr><td>emails</td><td>abuse@namecheap.com</td></tr></table></td></tr><tr><td>ip</td><td><table class='kv-table'><tr><th>Key</th><th>Value</th></tr><tr><td>asn</td><td>13335</td></tr><tr><td>asn_description</td><td>CLOUDFLARENET, US</td></tr><tr><td>network_name</td><td>CLOUDFLARENET</td></tr><tr><td>country</td><td><span class='badge fail'>No Data</span></td></tr><tr><td>ip_address</td><td>2606:4700:10::6814:16f9</td></tr></table></td></tr></table>
+</div><div class="section">
+    <h2>📂 Dns</h2>
+    <table class='kv-table'><tr><th>Key</th><th>Value</th></tr><tr><td>A</td><td><ul><li>104.20.22.249</li><li>172.66.168.234</li></ul></td></tr><tr><td>AAAA</td><td><ul><li>2606:4700:10::ac42:a8ea</li><li>2606:4700:10::6814:16f9</li></ul></td></tr><tr><td>MX</td><td><ul><li>1 aspmx.l.google.com.</li><li>5 alt1.aspmx.l.google.com.</li><li>10 alt4.aspmx.l.google.com.</li><li>5 alt2.aspmx.l.google.com.</li><li>10 alt3.aspmx.l.google.com.</li></ul></td></tr><tr><td>NS</td><td><ul><li>major.ns.cloudflare.com.</li><li>isla.ns.cloudflare.com.</li></ul></td></tr><tr><td>TXT</td><td><ul><li>&quot;google-site-verification=vr_zjYN3BM6NQE1--g4om5pWdhk8ituDccKJWS274mE&quot;</li><li>&quot;facebook-domain-verification=rlqrz8ctxk6c5gwg7ofzinsurscjqs&quot;</li><li>&quot;twilio-domain-verification=e1786b2574779e0531aba8d7470ad271&quot;</li><li>&quot;v=spf1 include:_spf.google.com ip4:107.182.235.238 ip4:107.182.233.166 ip4:107.182.233.169 ip4:103.14.71.185 ip4:120.138.27.32 ip6:2403:7000:8000:600::b5 include:mail.zendesk.com -all&quot;</li><li>&quot;google-site-verification=Y-zkjggIRxeVV3sXhXaN7qrdh1PxJkPoJdTuF9MMhrs&quot;</li><li>&quot;yahoo-verification-key=nnwi73eFY9zUGW5MOFMyFuvhxFmPnySFLZyJf4QmNx4=&quot;</li><li>&quot;google-site-verification=2wdFpOSsCNleUqOWpW8bx0gx1_tlr9vxpuARUguKw9s&quot;</li><li>&quot;apple-domain-verification=qVnI-JrN4zuhuHbKgoLdZfL2LNwzEkW0KmU0nYXQ1Pg&quot;</li></ul></td></tr><tr><td>CNAME</td><td></td></tr></table>
+</div><div class="section">
+    <h2>📂 Ports</h2>
+    <table class='kv-table'><tr><th>Key</th><th>Value</th></tr><tr><td>error</td><td>No response from target or host is down.</td></tr></table>
+</div><div class="section">
+    <h2>📂 Http</h2>
+    <table class='kv-table'><tr><th>Key</th><th>Value</th></tr><tr><td>status_code</td><td>200</td></tr><tr><td>headers</td><td><table class='kv-table'><tr><th>Key</th><th>Value</th></tr><tr><td>Date</td><td>Fri, 25 Jul 2025 13:16:35 GMT</td></tr><tr><td>Content-Type</td><td>text/html;charset=utf-8</td></tr><tr><td>Transfer-Encoding</td><td>chunked</td></tr><tr><td>Connection</td><td>keep-alive</td></tr><tr><td>Content-Encoding</td><td>gzip</td></tr><tr><td>content-language</td><td>en-US</td></tr><tr><td>vary</td><td>Accept-Encoding</td></tr><tr><td>Age</td><td>47894</td></tr><tr><td>x-cache</td><td>HIT</td></tr><tr><td>x-cache-hits</td><td>31450</td></tr><tr><td>Set-Cookie</td><td>com.xk72.webparts.csrf=; Max-Age=0; Expires=Thu, 01 Jan 1970 00:00:00 GMT; Path=/; HttpOnly; Secure; SameSite=Lax; Domain=letterboxd.com, com.xk72.webparts.csrf=44c360b2d3bb90ca0d60; Path=/; HttpOnly; Secure; SameSite=Lax</td></tr><tr><td>p3p</td><td>policyref=&quot;http://letterboxd.com/w3c/p3p.xml&quot;, CP=&quot;CAO CUR ADM DEV TAI OUR IND ONL UNI COM NAV INT&quot;</td></tr><tr><td>strict-transport-security</td><td>max-age=31536000</td></tr><tr><td>x-frame-options</td><td>SAMEORIGIN</td></tr><tr><td>x-content-type-options</td><td>nosniff</td></tr><tr><td>referrer-policy</td><td>strict-origin-when-cross-origin</td></tr><tr><td>cf-cache-status</td><td>DYNAMIC</td></tr><tr><td>Server</td><td>cloudflare</td></tr><tr><td>CF-RAY</td><td>964beebd19eea919-MAA</td></tr></table></td></tr><tr><td>final_url</td><td>https://letterboxd.com/</td></tr></table>
+</div><div class="section">
+    <h2>📂 Tech</h2>
+    <table class='kv-table'><tr><th>Key</th><th>Value</th></tr><tr><td>cdn</td><td><ul><li>CloudFlare</li></ul></td></tr><tr><td>miscellaneous</td><td><ul><li>Gravatar</li></ul></td></tr></table>
+</div><div class="section">
+    <h2>📂 Geoip</h2>
+    <table class='kv-table'><tr><th>Key</th><th>Value</th></tr><tr><td>ip</td><td>2606:4700:10::6814:16f9</td></tr><tr><td>city</td><td>San Francisco</td></tr><tr><td>region</td><td>California</td></tr><tr><td>country</td><td>US</td></tr><tr><td>loc</td><td>37.7621,-122.3971</td></tr><tr><td>org</td><td>AS13335 Cloudflare, Inc.</td></tr><tr><td>postal</td><td>94107</td></tr><tr><td>timezone</td><td>America/Los_Angeles</td></tr><tr><td>anycast</td><td>True</td></tr></table>
+</div><div class="footer">
+    &copy; 2025 Recon Tool | Generated for <strong>letterboxd.com</strong>
+</div>
+
+</body>
+</html>

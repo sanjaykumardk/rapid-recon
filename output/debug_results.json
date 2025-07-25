@@ -1,0 +1,68 @@
+{
+  "whois": {
+    "domain": {
+      "domain_name": "VULNWEB.COM",
+      "registrar": "EuroDNS S.A.",
+      "creation_date": "2010-06-14 07:50:29",
+      "expiration_date": "2026-06-14 07:50:29",
+      "name_servers": [
+        "NS1.EURODNS.COM",
+        "NS2.EURODNS.COM",
+        "NS3.EURODNS.COM",
+        "NS4.EURODNS.COM"
+      ],
+      "emails": [
+        "legalservices@eurodns.com",
+        "administrator@invicti.com"
+      ]
+    },
+    "ip": {
+      "asn": "16509",
+      "asn_description": "AMAZON-02, US",
+      "network_name": "AMAZO-ZPDX",
+      "country": null
+    }
+  },
+  "dns": {
+    "A": [
+      "44.228.249.3"
+    ],
+    "AAAA": [
+      "64:ff9b::2ce4:f903"
+    ],
+    "MX": [],
+    "NS": [
+      "ns3.eurodns.com.",
+      "ns2.eurodns.com.",
+      "ns1.eurodns.com.",
+      "ns4.eurodns.com."
+    ],
+    "TXT": [
+      "\"v=spf1 -all\"",
+      "\"google-site-verification=4LQORV-lTi-d4GPxtBEQWmFnwff7UAazQc9gZvHukbw\""
+    ],
+    "CNAME": []
+  },
+  "ports": {
+    "tcp": {
+      "80": "open"
+    }
+  },
+  "http": {
+    "error": "HTTP request failed: HTTPSConnectionPool(host='vulnweb.com', port=443): Max retries exceeded with url: / (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x000001C715237E90>, 'Connection to vulnweb.com timed out. (connect timeout=10)'))"
+  },
+  "tech_stack": {
+    "info": "No technologies detected or site may be unreachable."
+  },
+  "geoip": {
+    "ip": "44.228.249.3",
+    "hostname": "ec2-44-228-249-3.us-west-2.compute.amazonaws.com",
+    "city": "Boardman",
+    "region": "Oregon",
+    "country": "US",
+    "loc": "45.8399,-119.7006",
+    "org": "AS16509 Amazon.com, Inc.",
+    "postal": "97818",
+    "timezone": "America/Los_Angeles"
+  }
+}

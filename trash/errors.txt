@@ -1,0 +1,318 @@
+✅ 1. WHOIS Error
+
+WHOIS domain lookup failed: module 'whois' has no attribute 'whois'
+
+🔧 Fix:
+
+You're likely using the wrong whois package. Uninstall the incorrect one and install the correct one.
+
+pip uninstall whois -y
+pip install python-whois
+
+Then update your import in whois_lookup.py:
+
+# whois_lookup.py
+import whois  # python-whois
+
+def fetch_whois_info(domain):
+    try:
+        info = whois.whois(domain)
+        return info
+    except Exception as e:
+        return {"error": f"WHOIS domain lookup failed: {str(e)}"}
+
+✅ 2. Port Scan Error (Nmap Not Found)
+
+Nmap not found or error initializing scanner
+
+🔧 Fix:
+
+Install Nmap (the actual tool, not the Python wrapper).
+🔽 Install on Windows:
+
+    Go to: https://nmap.org/download.html
+
+    Download the Windows installer and install it.
+
+    During installation, check the box to add Nmap to PATH.
+
+🧪 Test:
+
+After installing, run in terminal:
+
+nmap --version
+
+You should see the version info if it's installed properly.
+✅ 3. HTTP Error
+
+Invalid URL 'poorvika.com': No scheme supplied. Perhaps you meant https://poorvika.com?
+
+🔧 Fix:
+
+Normalize the URL in http_info.py:
+
+from urllib.parse import urlparse
+import requests
+
+def fetch_http_info(url):
+    try:
+        if not urlparse(url).scheme:
+            url = 'https://' + url
+        response = requests.get(url, timeout=10)
+        return {
+            "status_code": response.status_code,
+            "headers": dict(response.headers)
+        }
+    except Exception as e:
+        return {"error": f"HTTP request failed: {str(e)}"}
+
+✅ 4. Technology Stack Detection Error
+
+unknown url type: 'poorvika.com'
+
+🔧 Fix:
+
+Same reason: BuiltWith expects a full URL with http:// or https://.
+
+In tech_stack.py, update:
+
+from urllib.parse import urlparse
+import builtwith
+
+def detect_tech_stack(url):
+    try:
+        if not urlparse(url).scheme:
+            url = 'https://' + url
+        tech = builtwith.parse(url)
+        return tech
+    except Exception as e:
+        return {"error": f"BuiltWith detection failed: {str(e)}"}
+
+✅ 5. TXT and CNAME DNS Records Empty
+
+No errors here — this is common. The target domain (poorvika.com) simply might not have TXT or CNAME records exposed. You can verify using tools like MXToolbox.
+✅ 6. BuiltWith Detection Returns Nothing
+
+    "No technologies detected or site may be unreachable."
+
+This sometimes happens with Cloudflare-protected or minimal sites. It’s not always a bug.
+
+But you can improve reliability by:
+
+    Using the full https:// URL as shown above.
+
+    Retrying on failure.
+
+✅ Recap of Fix Commands
+
+pip uninstall whois -y
+pip install python-whois
+
+Install Nmap from: https://nmap.org/download.html and make sure it's in your PATH.
+
+Update the functions in:
+
+    whois_lookup.py
+
+    http_info.py
+
+    tech_stack.py
+
+✅ Bonus: Update .env
+
+If you haven't added your IPInfo token yet:
+
+.env
+
+IPINFO_TOKEN=7ab18cf7902c76
+
+Once you apply all these fixes, rerun:
+
+python recon.py poorvika.com --all
+
+
+# recon.py
+
+import os
+import argparse
+from urllib.parse import urlparse
+from rich.console import Console
+from rich.panel import Panel
+from rich.table import Table
+from rich.progress import Progress, SpinnerColumn, TextColumn
+from rich import box
+
+from modules.input_handler import detect_input_type
+from modules.whois_lookup import perform_whois_lookup
+from modules.dns_lookup import get_dns_records
+from modules.port_scan import run_nmap_scan
+from modules.http_info import fetch_http_info
+from modules.tech_stack import detect_tech_stack
+from modules.geoip_lookup import get_geoip_info
+from modules.report_generator import generate_html_report
+from modules.json_export import export_json
+
+console = Console()
+
+def banner():
+    console.print(Panel.fit("""
+[bold blue]🚀 Rapid Recon[/bold blue]
+[white]Advanced Information Gathering & Reconnaissance Tool[/white]
+""", title="[bold cyan]Welcome to Rapid Recon[/bold cyan]", border_style="bright_magenta"))
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(description="Python-based reconnaissance tool for domains, IPs, and URLs.")
+    parser.add_argument("target", help="Target domain, IP address, or URL")
+    parser.add_argument("--scan-ports", action="store_true", help="Run Nmap port scan")
+    parser.add_argument("--skip-whois", action="store_true", help="Skip WHOIS lookups")
+    parser.add_argument("--dns", action="store_true", help="Fetch DNS records")
+    parser.add_argument("--http-info", action="store_true", help="Fetch HTTP headers/status")
+    parser.add_argument("--tech-stack", action="store_true", help="Detect web technologies using BuiltWith")
+    parser.add_argument("--geoip", action="store_true", help="Get geolocation from IPInfo")
+    parser.add_argument("--all", action="store_true", help="Run all scans")
+    parser.add_argument("--output", type=str, default="output/report.html", help="HTML output path (default: output/report.html)")
+    parser.add_argument("--json", action="store_true", help="Also save raw data as JSON")
+    return parser.parse_args()
+
+def print_section_header(title):
+    console.print(Panel(title, style="bold green", expand=False, border_style="cyan"))
+
+def display_table(data_dict):
+    if not data_dict or not isinstance(data_dict, dict):
+        console.print("[yellow]⚠ No data to display[/yellow]")
+        return
+
+    for section, items in data_dict.items():
+        table = Table(title=section.upper(), title_style="bold yellow", box=box.HEAVY_EDGE)
+
+        if isinstance(items, dict):
+            table.add_column("Key", style="cyan", no_wrap=True)
+            table.add_column("Value", style="magenta")
+            for key, value in items.items():
+                table.add_row(str(key), str(value))
+        elif isinstance(items, list):
+            table.add_column("Values", style="cyan")
+            for item in items:
+                table.add_row(str(item))
+        elif isinstance(items, str):
+            table.add_column("Info", style="green")
+            table.add_row(items)
+        else:
+            table.add_column("Output", style="white")
+            table.add_row(str(items))
+
+        console.print(table)
+
+def normalize_url(url):
+    parsed = urlparse(url)
+    if not parsed.scheme:
+        return "https://" + url
+    return url
+
+def main():
+    banner()
+    args = parse_arguments()
+
+    os.makedirs(os.path.dirname(args.output), exist_ok=True)
+
+    input_type, cleaned_input, ip_address = detect_input_type(args.target)
+    if input_type == "unknown":
+        console.print("[bold red]❌ Invalid input. Please provide a valid IP, domain, or URL.[/bold red]")
+        return
+
+    console.print(f"[green]✔ Input Type:[/green] {input_type}")
+    console.print(f"[green]✔ Normalized:[/green] {cleaned_input}")
+    console.print(f"[green]✔ Resolved IP:[/green] {ip_address or '❌ Could not resolve'}")
+
+    selected_modules = {
+        "whois": not args.skip_whois and (args.all or not any([
+            args.scan_ports, args.dns, args.http_info, args.tech_stack, args.geoip
+        ])),
+        "dns": args.all or args.dns,
+        "ports": args.all or args.scan_ports,
+        "http": args.all or args.http_info,
+        "tech": args.all or args.tech_stack,
+        "geoip": args.all or args.geoip,
+    }
+
+    results = {}
+
+    with Progress(
+        SpinnerColumn(),
+        TextColumn("[progress.description]{task.description}"),
+        transient=True,
+    ) as progress:
+        for name, enabled in selected_modules.items():
+            if not enabled:
+                continue
+
+            task = progress.add_task(f"[cyan]Running {name.upper()} scan...", total=None)
+
+            try:
+                if name == "whois":
+                    print_section_header("WHOIS Lookup")
+                    res = perform_whois_lookup(cleaned_input, ip_address)
+                    display_table(res)
+                    results["whois"] = res
+
+                elif name == "dns":
+                    print_section_header("DNS Records")
+                    res = get_dns_records(cleaned_input)
+                    display_table(res)
+                    results["dns"] = res
+
+                elif name == "ports":
+                    if ip_address:
+                        print_section_header("Port Scan")
+                        res = run_nmap_scan(ip_address)
+                        display_table(res)
+                        results["ports"] = res
+                    else:
+                        console.print("[yellow]⚠ IP address is required for port scan. Skipping.[/yellow]")
+
+                elif name == "http":
+                    print_section_header("HTTP Info")
+                    url = normalize_url(args.target)
+                    res = fetch_http_info(url)
+                    display_table(res)
+                    results["http"] = res
+
+                elif name == "tech":
+                    print_section_header("Technology Stack")
+                    url = normalize_url(args.target)
+                    res = detect_tech_stack(url)
+                    display_table(res)
+                    results["tech_stack"] = res
+
+                elif name == "geoip":
+                    if ip_address:
+                        print_section_header("Geolocation Info")
+                        res = get_geoip_info(ip_address)
+                        display_table(res)
+                        results["geoip"] = res
+                    else:
+                        console.print("[yellow]⚠ IP address is required for GeoIP lookup. Skipping.[/yellow]")
+
+            except Exception as e:
+                console.print(f"[red]❌ Error in {name} module: {e}[/red]")
+
+            progress.update(task, completed=1)
+
+    try:
+        generate_html_report(cleaned_input, results, args.output)
+        console.print(f"\n[bold green]🌐 Web report saved to:[/bold green] {args.output}")
+    except Exception as e:
+        console.print(f"[red]❌ Failed to generate HTML report: {e}[/red]")
+
+    if args.json:
+        try:
+            json_path = args.output.replace(".html", ".json")
+            export_json(results, json_path)
+            console.print(f"[bold blue]📁 JSON report saved to:[/bold blue] {json_path}")
+        except Exception as e:
+            console.print(f"[red]❌ Failed to export JSON: {e}[/red]")
+
+    console.print("\n[bold green]✅ Scan complete. Reports generated in output/ folder.[/bold green]")
+
+if __name__ == "__main__":
+    main()
