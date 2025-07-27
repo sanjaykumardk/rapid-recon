@@ -35,8 +35,3 @@
 pip install -r requirements.txt
 python recon.py --help
 python recon.py --all example.com
-
-
-
-
-
